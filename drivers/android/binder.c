@@ -945,9 +945,9 @@ static void binder_inc_node_tmpref_ilocked(struct binder_node *node);
 
 static int task_get_unused_fd_flags(struct binder_proc *proc, int flags)
 {
+	struct files_struct *files = proc->files;
 	unsigned long rlim_cur;
 	unsigned long irqs;
-	int ret;
 
 	mutex_lock(&proc->files_lock);
 	if (proc->files == NULL) {
@@ -1000,6 +1000,7 @@ static long task_close_fd(struct binder_proc *proc, unsigned int fd)
 		retval = -EINTR;
 err:
 	mutex_unlock(&proc->files_lock);
+
 	return retval;
 }
 
