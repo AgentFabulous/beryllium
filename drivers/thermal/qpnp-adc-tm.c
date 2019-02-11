@@ -278,6 +278,7 @@ struct qpnp_adc_tm_chip {
 	bool				adc_tm_initialized;
 	bool				adc_tm_recalib_check;
 	int				max_channels_available;
+	atomic_t			wq_cnt;
 	struct qpnp_vadc_chip		*vadc_dev;
 	struct workqueue_struct		*high_thr_wq;
 	struct workqueue_struct		*low_thr_wq;
